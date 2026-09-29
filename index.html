@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Post or Pause? is a quick classroom game about law-office communication judgment."
+    />
+    <meta name="theme-color" content="#f3f0e9" />
+    <title>Post or Pause?</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#game-main">Skip to game</a>
+
+    <header class="app-header">
+      <a class="brand" href="#" aria-label="Post or Pause home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>Post or Pause?</span>
+      </a>
+      <div class="header-meta" aria-label="Game details">
+        <span>Law office comms</span>
+        <span>10 calls</span>
+      </div>
+    </header>
+
+    <main id="game-main" tabindex="-1">
+      <section class="screen start-screen is-active" id="start-screen" aria-labelledby="start-title">
+        <div class="start-copy">
+          <p class="kicker">A quick judgment game</p>
+          <h1 id="start-title">Post or<br /><span>Pause?</span></h1>
+          <p class="intro">
+            Law-office communication moves fast. Decide where the message belongs, who needs it,
+            or whether it should be sent at all.
+          </p>
+          <button class="button button-primary" id="start-button" type="button">
+            Start <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <aside class="desk-note" aria-label="How to play">
+          <div class="note-tape" aria-hidden="true"></div>
+          <p class="note-heading">Before you send</p>
+          <ol>
+            <li><span>01</span> Check the audience.</li>
+            <li><span>02</span> Choose the right place.</li>
+            <li><span>03</span> Protect the client.</li>
+          </ol>
+          <p class="note-foot">About 3-5 minutes</p>
+        </aside>
+      </section>
+
+      <section class="screen game-screen" id="game-screen" aria-labelledby="card-type">
+        <div class="game-topline">
+          <p class="round-count" id="round-count">1 of 10</p>
+          <div class="progress-dots" id="progress-dots" aria-label="Round progress"></div>
+          <button class="text-button" id="quit-button" type="button">Start over</button>
+        </div>
+
+        <article class="message-card" id="message-card">
+          <div class="card-heading">
+            <div>
+              <p class="card-type" id="card-type">Where Does This Go?</p>
+              <p class="prompt-label" id="prompt-label">Choose the best method.</p>
+            </div>
+            <span class="channel-chip" id="channel-chip">#litigation-team</span>
+          </div>
+
+          <div class="message-row">
+            <div class="avatar" id="sender-avatar" aria-hidden="true">MS</div>
+            <div class="message-content">
+              <p class="sender-line">
+                <strong id="sender-name">Mara Singh</strong>
+                <span id="sender-role">Attorney</span>
+                <time id="message-time">9:14 AM</time>
+              </p>
+              <p class="scenario" id="scenario"></p>
+            </div>
+          </div>
+
+          <div class="file-attachment is-hidden" id="file-attachment" aria-label="Shared file attachment">
+            <span class="file-icon" aria-hidden="true">DOC</span>
+            <span><strong id="file-name">Matter timeline</strong><small>Shared case file</small></span>
+          </div>
+        </article>
+
+        <div class="answer-area">
+          <p class="answer-label" id="answer-label">Your call</p>
+          <div class="choices" id="choices" role="group" aria-labelledby="answer-label"></div>
+        </div>
+
+        <section class="feedback is-hidden" id="feedback" aria-live="polite" aria-labelledby="feedback-title">
+          <div class="feedback-mark" id="feedback-mark" aria-hidden="true"></div>
+          <div class="feedback-copy">
+            <h2 id="feedback-title"></h2>
+            <p id="feedback-text"></p>
+          </div>
+          <button class="button button-dark" id="next-button" type="button">
+            Next <span aria-hidden="true">→</span>
+          </button>
+        </section>
+      </section>
+
+      <section class="screen results-screen" id="results-screen" aria-labelledby="results-title">
+        <div class="results-copy">
+          <p class="kicker">Round complete</p>
+          <h1 id="results-title"><span id="final-score">8 / 10</span><br />Good Calls</h1>
+          <p class="results-message" id="results-message"></p>
+          <div class="results-actions">
+            <button class="button button-primary" id="play-again-button" type="button">Play Again</button>
+            <button class="button button-outline" id="review-button" type="button">Review Missed Cards</button>
+          </div>
+        </div>
+
+        <aside class="score-sheet" aria-label="Round summary">
+          <p>Round summary</p>
+          <div class="score-number"><span id="score-large">8</span><small>/ 10</small></div>
+          <div class="score-rule"></div>
+          <p id="score-note">Two decisions are worth another look.</p>
+        </aside>
+      </section>
+
+      <section class="screen review-screen" id="review-screen" aria-labelledby="review-title">
+        <div class="review-header">
+          <div>
+            <p class="kicker">A closer look</p>
+            <h1 id="review-title">Missed calls</h1>
+            <p id="review-summary"></p>
+          </div>
+          <button class="button button-primary" id="review-play-again-button" type="button">Play Again</button>
+        </div>
+        <div class="review-list" id="review-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built for practical classroom judgment.</p>
+      <p>No timer. No streaks. Just good calls.</p>
+    </footer>
+  </body>
+</html>
