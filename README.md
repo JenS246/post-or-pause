@@ -8,6 +8,7 @@ Post or Pause? is a short classroom mini-game for paralegal students. Each 10-ca
 - The draw is balanced across three card types and shuffled on every round.
 - Students receive immediate feedback and move forward when they are ready.
 - The final screen offers a low-pressure score and a review of missed cards.
+- Every scenario places the player in an entry-level paralegal or intern role and explains unfamiliar legal terms in context.
 - All state stays in the browser. There is no login, API, database, or backend.
 
 ## Run locally

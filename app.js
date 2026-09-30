@@ -1,76 +1,71 @@
 const TYPE_CONFIG = {
   where: {
     label: "Where Does This Go?",
-    prompt: "Choose the best method.",
     choices: ["Team / Channel", "Direct Message", "Email", "Meeting / Call", "Shared File", "Don’t Post or Send This Here"]
   },
   pause: {
     label: "Post or Pause?",
-    prompt: "Would you send this message as written?",
     choices: ["Post", "Pause"]
   },
   who: {
     label: "Who Needs This?",
-    prompt: "Choose the right audience.",
     choices: ["Everyone / Team", "Small Group", "One Person", "Don’t Send Electronically"]
   }
 };
 
-const card = (type, sender, role, channel, text, answer, explanation, file = "") => ({
-  type, sender, role, channel, text, answer, explanation, file
-});
+const card = (type, text, answer, explanation) => ({ type, text, answer, explanation });
 
 const CARDS = [
   // Where Does This Go? (15)
-  card("where", "Mara Singh", "Attorney", "#litigation-team", "Tomorrow’s deposition needs coverage. Any attorney or paralegal assigned to litigation may be able to help.", "Team / Channel", "This belongs in the litigation channel because several people could respond and the group needs to see when coverage is found."),
-  card("where", "Theo Martin", "Paralegal", "", "Your research assignment says to analyze a removal issue, but it does not say whether to focus on Pennsylvania or federal law. The assigning attorney is online.", "Direct Message", "A direct message makes sense here. One attorney can clear up the scope without involving the whole team."),
-  card("where", "Alina Cho", "Paralegal", "Email", "A client asked for the confirmed date, address, and arrival instructions for next week’s deposition. The office wants the client to have one message to refer back to.", "Email", "Email gives the client a clear, retrievable record of the final details."),
-  card("where", "Darius Bell", "Paralegal", "", "A discovery chat has gone back and forth for twenty minutes. Three team members still disagree about how to handle a set of duplicate documents.", "Meeting / Call", "Move this to a short call. The group needs discussion and a decision, not a longer chat thread."),
-  card("where", "Leila Romero", "Paralegal", "", "Two paralegals and an attorney will revise the same motion this week. Everyone needs to work from the current draft and see each other’s edits.", "Shared File", "Use one shared file so the team is not comparing attachments or guessing which draft is current.", "Motion_to_Compel_Working_Draft"),
-  card("where", "Noah Bennett", "Intern", "#general", "An intake form shows a client’s full Social Security number. You want help figuring out why the form was rejected.", "Don’t Post or Send This Here", "Pause before sharing the form. Use the office’s approved secure process and ask an authorized person for help without exposing the number in general chat."),
-  card("where", "Priya Desai", "Attorney", "Email", "The court reporter asks the firm to confirm the deposition date, location, and cancellation terms in writing.", "Email", "Email fits an external confirmation that both sides may need to retrieve later."),
-  card("where", "Evan Brooks", "Paralegal", "", "You cannot remember which billing code the managing paralegal uses for routine courier charges. She is available now, and no one else needs the answer.", "Direct Message", "A direct message is enough for this quick question to one coworker."),
-  card("where", "Camille Foster", "Office Manager", "#office-updates", "Snow is getting worse, and the office will close at 3:00 p.m. Staff may finish the day remotely.", "Team / Channel", "This belongs in the office channel so everyone receives the same time-sensitive update."),
-  card("where", "Jonah Price", "Paralegal", "", "A client has provided new facts that may affect the response to a pending motion. The attorney and paralegal need to compare the new facts with the current strategy.", "Meeting / Call", "Move this to a call. The issue needs back-and-forth discussion between the people handling the matter."),
-  card("where", "Imani Wells", "Paralegal", "", "Four people are updating exhibit descriptions before trial. The list changes throughout the day, and the team needs one current version.", "Shared File", "Use the shared file rather than creating separate copies that will need to be reconciled.", "Trial_Exhibit_Index"),
-  card("where", "Miles Chen", "Intern", "#social", "You overheard part of a conversation about a client’s medical diagnosis. The information has nothing to do with your assignment.", "Don’t Post or Send This Here", "Do not circulate client information out of curiosity. It is not needed for the work and does not belong in office chat."),
-  card("where", "Nadia Okafor", "Paralegal", "#miller-matter", "A new scheduling order shortens discovery by two weeks. The attorney, paralegals, and legal assistant assigned to Miller all need to adjust their work.", "Team / Channel", "Post the update in the matter channel and link to the order. The whole case team needs the same information."),
-  card("where", "Gabe Flores", "Paralegal", "", "A client letter is ready, but the supervising attorney must approve it before it goes out. No one else is reviewing the letter.", "Direct Message", "A direct message keeps the approval request with the one person who needs to act."),
-  card("where", "Sofia Haddad", "Paralegal", "Email", "A records vendor asks for the signed authorization and the date the firm needs the records. You are ready to send both.", "Email", "Email is the practical choice for a formal request to an outside vendor with a document attached."),
+  card("where", "You are helping prepare for a deposition, a formal question-and-answer session with a witness. The attorney asks you to find someone from the team that handles lawsuits who can attend tomorrow.", "Team / Channel", "Use the case-team channel. Several people may be able to help, and the team can see when coverage is found."),
+  card("where", "An attorney gives you a research assignment but does not say whether to use state or federal law. Only that attorney can clarify what was intended.", "Direct Message", "A direct message makes sense here. Only the assigning attorney needs to answer the question."),
+  card("where", "A client asks you to confirm the date, address, and arrival instructions for a formal witness interview under oath. The client will need to refer to the details later.", "Email", "Use email so the client has one clear message to refer back to."),
+  card("where", "You are helping with discovery, the exchange of case documents between the two sides. A team chat has gone back and forth, but three people still disagree about how to handle duplicate files.", "Meeting / Call", "Move this to a short call. The group needs a discussion and a decision, not a longer chat thread."),
+  card("where", "You notice that two paralegals are editing different copies of the same court document. The attorney also needs to review the latest changes.", "Shared File", "Use one shared file. Sending more attachments would create more versions of the same document."),
+  card("where", "A client sends you a new-client form that includes a full Social Security number. You need help figuring out why one section was rejected.", "Don’t Post or Send This Here", "Do not put the form in a general chat. Use the office’s approved secure process and ask an authorized person for help."),
+  card("where", "The person who will record a witness interview asks you to confirm the date, location, and cancellation terms in writing.", "Email", "Use email for this confirmation with someone outside the firm. Both sides can retrieve it later."),
+  card("where", "You cannot remember which billing code to use for a routine courier charge. An experienced paralegal is online, and no one else needs the answer.", "Direct Message", "A direct message is enough for this quick question to one coworker."),
+  card("where", "The office manager tells you the office will close at 3:00 p.m. because of snow and asks you to share the update with staff.", "Team / Channel", "Use the office channel so staff receive the same time-sensitive update."),
+  card("where", "A client sends you new facts that do not match the case notes. You and the attorney need to decide whether the planned response should change.", "Meeting / Call", "Move this to a call with the attorney. The new facts need discussion before anyone responds."),
+  card("where", "You and three coworkers are updating a list of exhibits, the documents and photos that may be shown in court. The list will change throughout the day.", "Shared File", "Use the shared file so everyone works from the same current list."),
+  card("where", "You overhear part of a conversation about a client’s medical diagnosis. The information has nothing to do with your assignment, but you are curious whether coworkers know more.", "Don’t Post or Send This Here", "Do not circulate unrelated client information. It is not needed for the work."),
+  card("where", "You receive a court notice that moves a case deadline two weeks earlier. Four people in the office are working on the case and will need to adjust their work.", "Team / Channel", "Post the update in the case-team channel and link to the court notice."),
+  card("where", "You finish a client letter, but the supervising attorney must approve it before it is sent. No one else is reviewing the letter.", "Direct Message", "Send the approval request directly to the supervising attorney."),
+  card("where", "A company that stores records asks you for the client’s signed permission form and the date the firm needs the records. You are ready to send both.", "Email", "Use email for the formal request and attached permission form."),
 
   // Post or Pause? (15)
-  card("pause", "Evan Brooks", "Paralegal", "#litigation-team", "URGENT!!! Does anyone know what happened with the Johnson case????", "Pause", "The message is vague and the urgency is not explained. Say what information you need and when you need it."),
-  card("pause", "Mara Singh", "Attorney", "#rivera-matter", "The Rivera hearing has moved to 2:00 p.m. The updated notice is in the case folder.", "Post", "This is a useful matter update and points the team to the current notice."),
-  card("pause", "Noah Bennett", "Intern", "#general", "Daniel Ruiz’s SSN ends in 4821. Is that enough to run the background check?", "Pause", "Even a partial Social Security number should not go into a general office channel. Use the approved secure process."),
-  card("pause", "Alina Cho", "Paralegal", "#kline-matter", "The transcript arrived this morning. I saved it in the case folder under Depositions > Kline > Final.", "Post", "The message tells the team what arrived and exactly where to find it."),
-  card("pause", "Theo Martin", "Paralegal", "#all-office", "@everyone @here Has anyone seen the blue trial binder?", "Pause", "Tagging the whole office is too broad for this request. Ask the matter team or the people who last used the binder."),
-  card("pause", "Leila Romero", "Paralegal", "#miller-matter", "Reminder: draft responses are due to Priya by 3:00 p.m. Friday. Please flag any problem by noon tomorrow.", "Post", "The right group gets a clear deadline and enough time to raise a problem."),
-  card("pause", "Miles Chen", "Intern", "#interns", "I think Theo filed the wrong version again. Someone should probably check his work.", "Pause", "Verify what happened, then raise the concern privately with the person who can correct it."),
-  card("pause", "Camille Foster", "Office Manager", "#office-updates", "The second-floor copier is down until noon. Please use the first-floor machine for anything that cannot wait.", "Post", "This is a clear office update with a useful workaround."),
-  card("pause", "Jonah Price", "Paralegal", "#miller-matter", "I attached Motion_Final_v7_NEW_revised2.docx. Please ignore all the earlier attachments.", "Pause", "Use the shared file and link to it instead of adding another version to the thread."),
-  card("pause", "Nadia Okafor", "Paralegal", "#harris-matter", "The client approved the revised chronology. I updated the case tracker. No response needed.", "Post", "The update is brief, relevant, and tells the team that no reply is needed."),
-  card("pause", "Darius Bell", "Paralegal", "#general", "Our client’s settlement demand is $275,000. Has anyone seen similar numbers lately?", "Pause", "A general channel is the wrong audience for matter-specific settlement information. Ask the case team in its approved space."),
-  card("pause", "Priya Desai", "Attorney", "#discovery-team", "Please review your privilege log rows by Wednesday at 11:00 a.m. Add questions as comments in the shared file.", "Post", "The message gives the team a task, a deadline, and one place for questions."),
-  card("pause", "Gabe Flores", "Paralegal", "Direct message", "Hi. Need this ASAP.", "Pause", "The recipient needs to know what you need and when you actually need it."),
-  card("pause", "Sofia Haddad", "Paralegal", "#miller-matter", "The court’s filing site is down. I’ll try again at 10:30 and update the docket tracker afterward.", "Post", "This explains the problem, the next step, and where the final status will be recorded."),
-  card("pause", "Imani Wells", "Paralegal", "Email", "Reply all: Thanks!", "Pause", "A reply-all that only says thanks adds noise without helping the group."),
+  card("pause", "You are about to post this in the case-team chat: “URGENT!!! Does anyone know what happened with the Johnson case????”", "Pause", "Pause. The message is vague and the urgency is not explained. Say what you need and when you need it."),
+  card("pause", "You draft this for the case-team chat: “Tomorrow’s hearing has moved to 2:00 p.m. The updated court notice is in the case folder.”", "Post", "Post it. The team gets the new time and knows where to find the notice."),
+  card("pause", "You draft this for the general office chat: “The client’s Social Security number ends in 4821. Is that enough to run the search?”", "Pause", "Pause. A client’s Social Security number should not be posted in a general chat."),
+  card("pause", "You draft this for the case team: “The transcript, the written record of the witness interview, arrived this morning. I saved it in the case folder.”", "Post", "Post it. The team knows what arrived and where to find it."),
+  card("pause", "You cannot find a trial binder, so you draft this for the all-office chat: “@everyone @here Has anyone seen the blue binder?”", "Pause", "Pause. Ask the case team or the people who last used the binder instead of alerting the whole office."),
+  card("pause", "You draft this for the case team: “The attorney needs our draft answers by 3:00 p.m. Friday. Please tell me by noon tomorrow if you may miss the deadline.”", "Post", "Post it. The message gives the team a clear deadline and time to raise a problem."),
+  card("pause", "You think a coworker saved the wrong document, so you draft this for the intern chat: “Theo used the wrong version again. Someone should check his work.”", "Pause", "Pause. Check the facts, then speak privately with the person who can correct the document."),
+  card("pause", "The office manager asks you to share this update: “The second-floor copier is down until noon. Use the first-floor machine for anything that cannot wait.”", "Post", "Post it. Staff get a clear update and a useful workaround."),
+  card("pause", "You draft this for the case team: “I attached Court_Response_FINAL_v7_new.docx. Please ignore all the earlier attachments.”", "Pause", "Pause. Link to the shared file instead of adding another version to the chat."),
+  card("pause", "You draft this for the case team: “The client approved the updated timeline. I marked it approved in the case tracker. No response needed.”", "Post", "Post it. The message is brief and tells the team where the status was recorded."),
+  card("pause", "You draft this for the general office chat: “Our client is willing to settle for $275,000. Has anyone seen similar amounts?”", "Pause", "Pause. Settlement information belongs with the people working on the case, not in a general chat."),
+  card("pause", "The attorney asks the team to review a list of documents that may contain private attorney-client messages. You draft: “Please review your assigned rows by Wednesday at 11:00 a.m. Add questions in the shared file.”", "Post", "Post it. The task, deadline, and place for questions are clear."),
+  card("pause", "You send a coworker this direct message: “Hi. Need this ASAP.”", "Pause", "Pause. Say what you need and when you actually need it."),
+  card("pause", "The court website used to submit documents is down. You draft: “The court site is down. I’ll try again at 10:30 and update the case tracker afterward.”", "Post", "Post it. The message explains the problem and what you will do next."),
+  card("pause", "Several coworkers are copied on an email. You are about to reply to everyone with only: “Thanks!”", "Pause", "Pause. A reply to everyone that only says thanks adds noise without helping the group."),
 
   // Who Needs This? (15)
-  card("who", "Theo Martin", "Paralegal", "", "A research assignment refers to a removal issue but does not say whether to focus on Pennsylvania or federal law. The assigning attorney can answer the question.", "One Person", "A direct question to the assigning attorney is enough. The rest of the team does not need the exchange."),
-  card("who", "Camille Foster", "Office Manager", "", "The building will test the fire alarm at 11:00 a.m. Staff may hear alarms and announcements for about fifteen minutes.", "Everyone / Team", "Everyone in the office needs the notice so the test does not cause confusion."),
-  card("who", "Leila Romero", "Paralegal", "", "A deposition has moved from Tuesday to Thursday. Only the attorney, paralegal, and intern assigned to that matter need to change their calendars.", "Small Group", "Send this to the matter team. People outside the case do not need the scheduling update."),
-  card("who", "Noah Bennett", "Intern", "", "You spot a typo on an intake form that also shows the client’s full Social Security number. You consider sending a screenshot to coworkers for help.", "Don’t Send Electronically", "Do not circulate the screenshot. Ask an authorized person for help through the office’s secure procedure without exposing the number."),
-  card("who", "Mara Singh", "Attorney", "", "A routine status conference needs coverage tomorrow morning. Several people on the litigation team are qualified to handle it.", "Everyone / Team", "Ask the litigation team. More than one person may be able to help, and everyone should see when the request is covered."),
-  card("who", "Evan Brooks", "Paralegal", "", "You notice a wrong case citation in a coworker’s draft. The draft has not been filed, and that coworker can fix it.", "One Person", "Tell the coworker privately and professionally so the citation can be corrected."),
-  card("who", "Alina Cho", "Paralegal", "", "Three paralegals working on the same production need to agree on a label for a new document category.", "Small Group", "The production group should make the decision. The whole office does not need the discussion."),
-  card("who", "Miles Chen", "Intern", "", "You hear that a client may be getting divorced. It has nothing to do with the matter, but you are curious whether other interns know more.", "Don’t Send Electronically", "Do not circulate personal speculation about a client. It is not needed for the work."),
-  card("who", "Nadia Okafor", "Paralegal", "", "The court has extended a filing deadline. The change affects the attorney, paralegals, and assistant assigned to that case, but no other teams.", "Small Group", "Share the confirmed change with the matter team, not with coworkers who have no role in the case."),
-  card("who", "Darius Bell", "Managing Paralegal", "", "The steps for opening a new electronic matter have changed. Every paralegal will use the new process starting Monday.", "Everyone / Team", "The paralegal team needs one clear announcement because the procedure applies to all of them."),
-  card("who", "Priya Desai", "Attorney", "", "A client emailed a routine scheduling question. The assigned paralegal manages that client’s appointments and can respond.", "One Person", "Send the question to the assigned paralegal. Copying the rest of the matter team would add no value."),
-  card("who", "Gabe Flores", "Paralegal", "", "An attorney, paralegal, and investigator need to choose a location for a witness interview. No one else is involved.", "Small Group", "Keep the discussion with the three people arranging the interview."),
-  card("who", "Sofia Haddad", "Paralegal", "", "You need to know whether the office manager ordered more exhibit labels for tomorrow’s trial preparation.", "One Person", "Ask the office manager directly. This routine supply question does not need a group message."),
-  card("who", "Imani Wells", "Paralegal", "", "A client mentions a medical condition that is unrelated to the case. You consider telling coworkers because the detail surprised you.", "Don’t Send Electronically", "Do not share unrelated client information as office conversation."),
-  card("who", "Renee Alvarez", "IT Coordinator", "", "IT has found that newly uploaded files may not be saving correctly. Several case teams are working in the document system today.", "Everyone / Team", "A team-wide message makes sense because anyone using the system needs to stop and check the IT instructions.")
+  card("who", "An attorney gives you a research assignment but does not say whether to compare state law or federal law. That attorney can clarify what was intended.", "One Person", "Ask the assigning attorney directly. The rest of the team does not need the exchange."),
+  card("who", "The office manager tells you the building will test the fire alarm at 11:00 a.m. Staff may hear alarms and announcements for about fifteen minutes.", "Everyone / Team", "Share the notice with the office team so the test does not cause confusion."),
+  card("who", "You learn that a deposition, a formal question-and-answer session with a witness, has moved from Tuesday to Thursday. Four people in the office are working on that case.", "Small Group", "Send the update to the case team. People working on other cases do not need it."),
+  card("who", "You spot a typo on a new-client form that also shows the client’s full Social Security number. You consider sending a screenshot to coworkers for help.", "Don’t Send Electronically", "Do not circulate the screenshot. Use the office’s secure process and ask an authorized person for help."),
+  card("who", "The attorney asks you to help find coverage for a short court scheduling meeting tomorrow. Several people on the court-case team may be available.", "Everyone / Team", "Ask the court-case team. Several people may be able to help, and the group can see when coverage is found."),
+  card("who", "You notice a wrong case name in a coworker’s draft. The document has not been sent to the court or anyone outside the office, and that coworker can fix it.", "One Person", "Tell the coworker privately so the error can be corrected."),
+  card("who", "You and two other paralegals are organizing case documents that will be sent to the other side. You need to agree on a label for a new group of files.", "Small Group", "Keep the discussion with the three paralegals doing the work."),
+  card("who", "You hear that a client may be getting divorced. It has nothing to do with the case, but you are curious whether other interns know more.", "Don’t Send Electronically", "Do not circulate personal speculation about a client. It is not needed for the work."),
+  card("who", "You receive a court notice that extends a deadline. The change affects the attorney, paralegals, and assistant assigned to one case.", "Small Group", "Share the change with the case team, not with coworkers who have no role in the case."),
+  card("who", "The managing paralegal gives you new instructions for opening a case in the firm’s document system. Every paralegal will use the new steps starting Monday.", "Everyone / Team", "Share the instructions with the paralegal team because the new process applies to all of them."),
+  card("who", "A client emails you a routine scheduling question. The paralegal assigned to that client manages the appointments and can respond.", "One Person", "Send the question to the assigned paralegal. The rest of the case team does not need it."),
+  card("who", "You are helping arrange a witness interview. The attorney, investigator, and assigned paralegal need to choose a location.", "Small Group", "Keep the discussion with the three people arranging the interview."),
+  card("who", "You need to know whether the office manager ordered more labels for the documents that may be shown in court tomorrow.", "One Person", "Ask the office manager directly. This supply question does not need a group message."),
+  card("who", "A client mentions a medical condition that is unrelated to the case. You consider telling coworkers because the detail surprised you.", "Don’t Send Electronically", "Do not share unrelated client information as office conversation."),
+  card("who", "IT emails you that newly uploaded files may not be saving correctly. Several case teams are using the document system today, and you need to pass along the warning.", "Everyone / Team", "Send a team-wide message because anyone using the system needs the warning and the IT instructions.")
 ];
 
 const ROUND_SIZE = 10;
@@ -110,10 +105,6 @@ function balancedRound() {
   ]);
 }
 
-function initials(name) {
-  return name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase();
-}
-
 function showScreen(name) {
   Object.entries(screens).forEach(([key, element]) => {
     element.classList.toggle("is-active", key === name);
@@ -132,39 +123,13 @@ function startRound() {
   renderCard();
 }
 
-function renderProgress() {
-  const container = document.querySelector("#progress-dots");
-  container.replaceChildren();
-  round.forEach((_, index) => {
-    const dot = document.createElement("span");
-    dot.className = "progress-dot";
-    if (index < currentIndex) dot.classList.add("is-done");
-    if (index === currentIndex) dot.classList.add("is-current");
-    dot.setAttribute("aria-hidden", "true");
-    container.append(dot);
-  });
-  container.setAttribute("aria-label", `Question ${currentIndex + 1} of ${ROUND_SIZE}`);
-}
-
 function renderCard() {
   answered = false;
   const current = round[currentIndex];
   const config = TYPE_CONFIG[current.type];
   document.querySelector("#round-count").textContent = `${currentIndex + 1} of ${ROUND_SIZE}`;
   document.querySelector("#card-type").textContent = config.label;
-  document.querySelector("#prompt-label").textContent = config.prompt;
-  const channelChip = document.querySelector("#channel-chip");
-  channelChip.textContent = current.channel;
-  channelChip.classList.toggle("is-hidden", !current.channel);
-  document.querySelector("#sender-avatar").textContent = initials(current.sender);
-  document.querySelector("#sender-name").textContent = current.sender;
-  document.querySelector("#sender-role").textContent = current.role;
-  document.querySelector("#message-time").textContent = ["8:42 AM", "9:14 AM", "10:26 AM", "1:08 PM", "3:37 PM"][currentIndex % 5];
   document.querySelector("#scenario").textContent = current.text;
-
-  const attachment = document.querySelector("#file-attachment");
-  attachment.classList.toggle("is-hidden", !current.file);
-  document.querySelector("#file-name").textContent = current.file || "Shared file";
 
   const choices = document.querySelector("#choices");
   choices.replaceChildren();
@@ -179,7 +144,6 @@ function renderCard() {
   });
 
   document.querySelector("#feedback").className = "feedback is-hidden";
-  renderProgress();
   document.querySelector("#message-card").focus?.();
 }
 
@@ -223,16 +187,11 @@ function nextCard() {
 
 function showResults() {
   const messages = {
-    high: "Strong judgment. You kept the audience, message, and medium in mind.",
-    mid: "Good calls. A few situations were worth pausing over.",
-    low: "Some of these decisions are less obvious than they look. Try another round."
+    high: "You chose the right audience, method, or pause in most situations.",
+    mid: "Review the missed cards to see which details changed the best choice.",
+    low: "Review the missed cards, then try another round."
   };
-  const note = missed.length === 0
-    ? "Every decision held up."
-    : `${missed.length} decision${missed.length === 1 ? " is" : "s are"} worth another look.`;
   document.querySelector("#final-score").textContent = `${score} / ${ROUND_SIZE}`;
-  document.querySelector("#score-large").textContent = score;
-  document.querySelector("#score-note").textContent = note;
   document.querySelector("#results-message").textContent = score >= 9 ? messages.high : score >= 7 ? messages.mid : messages.low;
   const reviewButton = document.querySelector("#review-button");
   reviewButton.hidden = missed.length === 0;

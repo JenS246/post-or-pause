@@ -17,7 +17,6 @@
 
     <header class="app-header">
       <a class="brand" href="#" aria-label="Post or Pause home">
-        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
         <span>Post or Pause?</span>
       </a>
     </header>
@@ -25,7 +24,6 @@
     <main id="game-main" tabindex="-1">
       <section class="screen start-screen is-active" id="start-screen" aria-labelledby="start-title">
         <div class="start-copy">
-          <p class="kicker">Law Office Communication</p>
           <h1 id="start-title">Post or<br /><span>Pause?</span></h1>
           <p class="intro">
             Law-office communication moves fast. Decide where the message belongs, who needs it,
@@ -35,55 +33,24 @@
             Start <span aria-hidden="true">→</span>
           </button>
         </div>
-
-        <aside class="desk-note" aria-label="How to play">
-          <div class="note-tape" aria-hidden="true"></div>
-          <p class="note-heading">Before you send</p>
-          <ul>
-            <li>Check the audience.</li>
-            <li>Choose the right place.</li>
-            <li>Protect the client.</li>
-          </ul>
-        </aside>
       </section>
 
       <section class="screen game-screen" id="game-screen" aria-labelledby="card-type">
         <div class="game-topline">
           <p class="round-count" id="round-count">1 of 10</p>
-          <div class="progress-dots" id="progress-dots" aria-label="Round progress"></div>
           <button class="text-button" id="quit-button" type="button">Start over</button>
         </div>
 
         <article class="message-card" id="message-card">
           <div class="card-heading">
-            <div>
-              <p class="card-type" id="card-type">Where Does This Go?</p>
-              <p class="prompt-label" id="prompt-label">Choose the best method.</p>
-            </div>
-            <span class="channel-chip" id="channel-chip">#litigation-team</span>
+            <h1 class="card-type" id="card-type">Where Does This Go?</h1>
           </div>
 
-          <div class="message-row">
-            <div class="avatar" id="sender-avatar" aria-hidden="true">MS</div>
-            <div class="message-content">
-              <p class="sender-line">
-                <strong id="sender-name">Mara Singh</strong>
-                <span id="sender-role">Attorney</span>
-                <time id="message-time">9:14 AM</time>
-              </p>
-              <p class="scenario" id="scenario"></p>
-            </div>
-          </div>
-
-          <div class="file-attachment is-hidden" id="file-attachment" aria-label="Shared file attachment">
-            <span class="file-icon" aria-hidden="true">DOC</span>
-            <span><strong id="file-name">Matter timeline</strong><small>Shared case file</small></span>
-          </div>
+          <p class="scenario" id="scenario"></p>
         </article>
 
         <div class="answer-area">
-          <p class="answer-label" id="answer-label">Your call</p>
-          <div class="choices" id="choices" role="group" aria-labelledby="answer-label"></div>
+          <div class="choices" id="choices" role="group" aria-label="Answer choices"></div>
         </div>
 
         <section class="feedback is-hidden" id="feedback" aria-live="polite" aria-labelledby="feedback-title">
@@ -100,7 +67,6 @@
 
       <section class="screen results-screen" id="results-screen" aria-labelledby="results-title">
         <div class="results-copy">
-          <p class="kicker">Round complete</p>
           <h1 id="results-title"><span id="final-score">8 / 10</span><br />Good Calls</h1>
           <p class="results-message" id="results-message"></p>
           <div class="results-actions">
@@ -108,19 +74,11 @@
             <button class="button button-outline" id="review-button" type="button">Review Missed Cards</button>
           </div>
         </div>
-
-        <aside class="score-sheet" aria-label="Round summary">
-          <p>Round summary</p>
-          <div class="score-number"><span id="score-large">8</span><small>/ 10</small></div>
-          <div class="score-rule"></div>
-          <p id="score-note">Two decisions are worth another look.</p>
-        </aside>
       </section>
 
       <section class="screen review-screen" id="review-screen" aria-labelledby="review-title">
         <div class="review-header">
           <div>
-            <p class="kicker">A closer look</p>
             <h1 id="review-title">Missed calls</h1>
             <p id="review-summary"></p>
           </div>
